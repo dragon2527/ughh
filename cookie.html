@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raw Cookie Extractor</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: monospace;
+      padding: 16px;
+      margin: 0;
+    }
+    h1 {
+      font-size: 20px;
+      color: #0f0;
+      margin-bottom: 12px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 8px;
+      resize: none;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #333;
+      color: #fff;
+      border: none;
+      width: 100%;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #555;
+    }
+    .note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Raw Cookie Extractor</h1>
+  <textarea id="cookieRaw" readonly></textarea>
+  <button onclick="copyCookies()">Copy to Clipboard</button>
+  <div class="note">
+    Note: HttpOnly cookies cannot be accessed via JavaScript.
+  </div>
+  <script>
+    function displayCookies() {
+      const raw = document.cookie;
+      document.getElementById('cookieRaw').value = raw || 'No accessible cookies found.';
+    }
+
+    function copyCookies() {
+      const text = document.getElementById('cookieRaw').value;
+      navigator.clipboard.writeText(text).catch(() => {
+        alert('Clipboard copy failed. You can copy manually.');
+      });
+    }
+
+    window.onload = displayCookies;
+  </script>
+</body>
+</html>
